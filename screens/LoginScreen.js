@@ -6,9 +6,9 @@ import { useNavigation } from "@react-navigation/native";
 
 const LoginScreen = () => {
   const screenWidth = Math.round(Dimensions.get("window").width);
+  const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigation = useNavigation();
 
   return (
     <View
@@ -94,7 +94,7 @@ const LoginScreen = () => {
         >
           <Text style={{ color: "#555" }}>Don't have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
-            <Text style={{ fontWeight: 500, color: "#056526" }}>
+            <Text style={{ fontWeight: 600, color: "#056526" }}>
               Create Here
             </Text>
           </TouchableOpacity>
