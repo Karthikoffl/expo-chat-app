@@ -56,7 +56,7 @@ const SignUpScreen = () => {
         >
           Join with us!
         </Text>
-        {/* <View
+        <View
           style={{
             width: "100%",
             alignItems: "center",
@@ -82,7 +82,7 @@ const SignUpScreen = () => {
               style={{ width: "100%", height: "100%" }}
             />
           </TouchableOpacity>
-        </View> */}
+        </View>
         <View
           style={{
             width: "100%",
