@@ -10,13 +10,50 @@ import React, { useState } from "react";
 import { BGImage, Logo } from "../assets";
 import UserTextInput from "../components/UserTextInput";
 import { useNavigation } from "@react-navigation/native";
+import { avatars } from "../utils/support";
+import { MaterialIcons } from "@expo/vector-icons";
+import { BlurView } from "expo-blur";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { firebaseAuth, firestoreDB } from "../config/firebase.config";
+import { doc, setDoc } from "firebase/firestore";
 
 const SignUpScreen = () => {
   const screenWidth = Math.round(Dimensions.get("window").width);
+  const screenHeight = Math.round(Dimensions.get("window").height);
   const navigation = useNavigation();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [avatar, setAvatar] = useState(avatars[0]?.image.asset.url);
+  const [isAvatarMenu, setIsAvatarMenu] = useState(false);
+  const [getEmailValidationStatus, setGetEmailValidationStatus] =
+    useState(false);
+
+  const handleAvatar = (item) => {
+    setAvatar(item?.image.asset.url);
+    setIsAvatarMenu(false);
+  };
+
+  const handleSignUp = async () => {
+    if (getEmailValidationStatus && email !== "") {
+      await createUserWithEmailAndPassword(firebaseAuth, email, password).then(
+        (userCred) => {
+          const data = {
+            _id: userCred?.user.uid,
+            fullName: name,
+            profilePic: avatar,
+            providerData: userCred.user.providerData[0],
+          };
+
+          setDoc(doc(firestoreDB, "users", userCred?.user.uid), data).then(
+            () => {
+              navigation.navigate("LoginScreen");
+            }
+          );
+        }
+      );
+    }
+  };
 
   return (
     <View
@@ -27,6 +64,61 @@ const SignUpScreen = () => {
         resizeMode="cover"
         style={{ height: 280, width: screenWidth }}
       />
+
+      {isAvatarMenu && (
+        <>
+          <View
+            style={{
+              position: "absolute",
+              zIndex: 10,
+              inset: 0,
+              width: screenWidth,
+              height: screenHeight,
+            }}
+          >
+            <ScrollView>
+              <BlurView
+                style={{
+                  height: screenHeight,
+                  width: screenWidth,
+                  paddingVertical: 30,
+                  paddingHorizontal: 10,
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "space-evenly",
+                  flexWrap: "wrap",
+                }}
+                tint="light"
+                intensity={40}
+              >
+                {avatars?.map((item) => (
+                  <TouchableOpacity
+                    onPress={() => handleAvatar(item)}
+                    key={item._id}
+                    style={{
+                      width: 60,
+                      height: 60,
+                      marginVertical: 20,
+                      marginHorizontal: 30,
+                      padding: 1,
+                      borderRadius: 50,
+                      borderWidth: 1,
+                      borderColor: "#43c651",
+                      position: "relative",
+                    }}
+                  >
+                    <Image
+                      source={{ uri: item?.image.asset.url }}
+                      style={{ width: "100%", height: "100%" }}
+                    />
+                  </TouchableOpacity>
+                ))}
+              </BlurView>
+            </ScrollView>
+          </View>
+        </>
+      )}
+
       <View
         style={{
           width: "100%",
@@ -56,88 +148,107 @@ const SignUpScreen = () => {
         >
           Join with us!
         </Text>
-        <View
-          style={{
-            width: "100%",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "relative",
-            marginVertical: 5,
-          }}
-        >
-          <TouchableOpacity
+        <ScrollView style={{ width: "100%", height: "100%" }}>
+          <View
             style={{
-              width: 50,
-              height: 50,
-              padding: 5,
-              borderRadius: 50,
-              borderWidth: 1,
-              borderColor: "#43c651",
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
               position: "relative",
             }}
           >
-            <Image
-              source={{ uri: "" }}
-              resizeMode="contain"
-              style={{ width: "100%", height: "100%" }}
+            <TouchableOpacity
+              onPress={() => setIsAvatarMenu(true)}
+              style={{
+                width: 70,
+                height: 70,
+                borderRadius: 50,
+                borderWidth: 1,
+                borderColor: "#43c651",
+                position: "relative",
+              }}
+            >
+              <Image
+                source={{ uri: avatar }}
+                resizeMode="contain"
+                style={{ width: "100%", height: "100%" }}
+              />
+              <View
+                style={{
+                  width: 25,
+                  height: 25,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  position: "absolute",
+                  top: 0,
+                  right: -5,
+                  backgroundColor: "#43c651",
+                  borderRadius: 50,
+                }}
+              >
+                <MaterialIcons name="edit" size={15} color={"#FFF"} />
+              </View>
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <UserTextInput
+              placeholder="Full Name"
+              isPass={false}
+              setStateValue={setName}
             />
-          </TouchableOpacity>
-        </View>
-        <View
-          style={{
-            width: "100%",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <UserTextInput
-            placeholder="Full Name"
-            isPass={false}
-            setStateValue={setName}
-          />
-          <UserTextInput
-            placeholder="Email"
-            isPass={false}
-            setStateValue={setEmail}
-          />
-          <UserTextInput
-            placeholder="Password"
-            isPass={true}
-            setStateValue={setPassword}
-          />
-        </View>
-        <TouchableOpacity
-          style={{
-            width: "100%",
-            paddingHorizontal: 40,
-            paddingVertical: 20,
-            borderRadius: 10,
-            backgroundColor: "#43c651",
-            marginHorizontal: 20,
-            marginVertical: 20,
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <Text style={{ fontWeight: 600, color: "#fff", fontSize: 16 }}>
-            Sign In
-          </Text>
-        </TouchableOpacity>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            marginTop: 30,
-          }}
-        >
-          <Text style={{ color: "#555" }}>Already have an account </Text>
-          <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
-            <Text style={{ fontWeight: 600, color: "#056526" }}>
-              Login Here
+            <UserTextInput
+              placeholder="Email"
+              isPass={false}
+              setStateValue={setEmail}
+              setGetEmailValidationStatus={setGetEmailValidationStatus}
+            />
+            <UserTextInput
+              placeholder="Password"
+              isPass={true}
+              setStateValue={setPassword}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={handleSignUp}
+            style={{
+              paddingHorizontal: 40,
+              paddingVertical: 20,
+              borderRadius: 10,
+              backgroundColor: "#43c651",
+              marginHorizontal: 10,
+              marginVertical: 20,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Text style={{ fontWeight: 600, color: "#fff", fontSize: 16 }}>
+              Sign In
             </Text>
           </TouchableOpacity>
-        </View>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "center",
+              marginTop: 30,
+            }}
+          >
+            <Text style={{ color: "#555" }}>Already have an account </Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("LoginScreen")}
+            >
+              <Text style={{ fontWeight: 600, color: "#056526" }}>
+                Login Here
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
       </View>
     </View>
   );
