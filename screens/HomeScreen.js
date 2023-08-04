@@ -68,7 +68,7 @@ const HomeScreen = () => {
               height: 50,
               borderRadius: 50,
               borderWidth: 1,
-              borderColor: "#43c651",
+              borderColor: "#1871ED",
               alignItems: "center",
               justifyContent: "center",
             }}
@@ -123,7 +123,7 @@ const HomeScreen = () => {
                     justifyContent: "center",
                   }}
                 >
-                  <ActivityIndicator size={"large"} color={"#43C651"} />
+                  <ActivityIndicator size={"large"} color={"#1871ED"} />
                 </View>
               </>
             ) : (
@@ -168,7 +168,7 @@ const MessageCard = ({ room }) => {
           alignItems: "center",
           justifyContent: "center",
           borderWidth: 1,
-          borderColor: "#43c651",
+          borderColor: "#1871ED",
           margin: 10,
         }}
       >
@@ -199,7 +199,7 @@ const MessageCard = ({ room }) => {
       </View>
       <Text
         style={{
-          color: "#43c651",
+          color: "#1871ED",
           paddingHorizontal: 10,
           fontWeight: 600,
           fontSize: 15,

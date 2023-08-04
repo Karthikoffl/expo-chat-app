@@ -55,7 +55,7 @@ const ProfileScreen = () => {
             position: "relative",
             borderWidth: 1,
             padding: 1,
-            borderColor: "#43c651",
+            borderColor: "#1871ED",
             borderRadius: 50,
           }}
         >
@@ -70,7 +70,7 @@ const ProfileScreen = () => {
             fontSize: 22,
             fontWeight: 600,
             paddingTop: 10,
-            color: "#056526",
+            color: "#1871ED",
           }}
         >
           {user?.fullName}
@@ -378,7 +378,7 @@ const ProfileScreen = () => {
           style={{
             fontSize: 16,
             fontWeight: 600,
-            color: "#056526",
+            color: "#1871ED",
             paddingHorizontal: 10,
           }}
         >

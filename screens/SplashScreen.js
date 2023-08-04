@@ -42,7 +42,7 @@ const SplashScreen = () => {
         style={{ width: 80, height: 80, marginBottom: 70 }}
         resizeMode="contain"
       />
-      <ActivityIndicator size={"large"} color={"#43C651"} />
+      <ActivityIndicator size={"large"} color={"#1871ED"} />
     </View>
   );
 };

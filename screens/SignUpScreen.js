@@ -103,7 +103,7 @@ const SignUpScreen = () => {
                       padding: 1,
                       borderRadius: 50,
                       borderWidth: 1,
-                      borderColor: "#43c651",
+                      borderColor: "#1871ED",
                       position: "relative",
                     }}
                   >
@@ -164,7 +164,7 @@ const SignUpScreen = () => {
                 height: 70,
                 borderRadius: 50,
                 borderWidth: 1,
-                borderColor: "#43c651",
+                borderColor: "#1871ED",
                 position: "relative",
               }}
             >
@@ -182,7 +182,7 @@ const SignUpScreen = () => {
                   position: "absolute",
                   top: 0,
                   right: -5,
-                  backgroundColor: "#43c651",
+                  backgroundColor: "#1871ED",
                   borderRadius: 50,
                 }}
               >
@@ -220,7 +220,7 @@ const SignUpScreen = () => {
               paddingHorizontal: 40,
               paddingVertical: 20,
               borderRadius: 10,
-              backgroundColor: "#43c651",
+              backgroundColor: "#1871ED",
               marginHorizontal: 10,
               marginVertical: 20,
               alignItems: "center",
@@ -243,7 +243,7 @@ const SignUpScreen = () => {
             <TouchableOpacity
               onPress={() => navigation.navigate("LoginScreen")}
             >
-              <Text style={{ fontWeight: 600, color: "#056526" }}>
+              <Text style={{ fontWeight: 600, color: "#1871ED" }}>
                 Login Here
               </Text>
             </TouchableOpacity>

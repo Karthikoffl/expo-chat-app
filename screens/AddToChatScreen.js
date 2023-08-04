@@ -38,7 +38,7 @@ const AddToChatScreen = () => {
         style={{
           width: "100%",
           height: 200,
-          backgroundColor: "#43c651",
+          backgroundColor: "#1871ED",
           paddingHorizontal: 4,
           paddingVertical: 6,
         }}
@@ -62,7 +62,7 @@ const AddToChatScreen = () => {
               height: 50,
               borderRadius: 50,
               borderWidth: 1,
-              borderColor: "#43c651",
+              borderColor: "#1871ED",
               alignItems: "center",
               justifyContent: "center",
             }}

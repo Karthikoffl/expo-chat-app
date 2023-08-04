@@ -85,7 +85,7 @@ const ChatScreen = ({ route }) => {
         style={{
           width: "100%",
           height: 170,
-          backgroundColor: "#43c651",
+          backgroundColor: "#1871ED",
           paddingHorizontal: 4,
           paddingVertical: 6,
         }}
@@ -209,7 +209,7 @@ const ChatScreen = ({ route }) => {
                     justifyContent: "center",
                   }}
                 >
-                  <ActivityIndicator size={"large"} color={"#43C651"} />
+                  <ActivityIndicator size={"large"} color={"#1871ED"} />
                 </View>
               ) : (
                 // messages
@@ -224,7 +224,7 @@ const ChatScreen = ({ route }) => {
                             borderTopLeftRadius: 20,
                             borderBottomLeftRadius: 20,
                             borderTopRightRadius: 20,
-                            backgroundColor: "#43c651",
+                            backgroundColor: "#1871ED",
                             width: "auto",
                             position: "relative",
                             alignSelf: "flex-end",
@@ -373,7 +373,7 @@ const ChatScreen = ({ route }) => {
                   onChangeText={(text) => setMessage(text)}
                 />
                 <TouchableOpacity>
-                  <Entypo name="mic" size={24} color="#43C651" />
+                  <Entypo name="mic" size={24} color="#1871ED" />
                 </TouchableOpacity>
               </View>
               <TouchableOpacity

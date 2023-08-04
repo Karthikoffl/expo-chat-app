@@ -125,7 +125,7 @@ const LoginScreen = () => {
             paddingHorizontal: 40,
             paddingVertical: 20,
             borderRadius: 10,
-            backgroundColor: "#43c651",
+            backgroundColor: "#1871ED",
             marginHorizontal: 20,
             marginVertical: 20,
             alignItems: "center",
@@ -146,7 +146,7 @@ const LoginScreen = () => {
         >
           <Text style={{ color: "#555" }}>Don't have an account? </Text>
           <TouchableOpacity onPress={() => navigation.navigate("SignUpScreen")}>
-            <Text style={{ fontWeight: 600, color: "#056526" }}>
+            <Text style={{ fontWeight: 600, color: "#1871ED" }}>
               Create Here
             </Text>
           </TouchableOpacity>
