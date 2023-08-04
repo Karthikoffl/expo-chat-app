@@ -1,9 +1,5 @@
-primary color: "#43c651"
-primaryBold: "#056526"
-primaryText: "#555"
-
 user 1: 
-	email: karthiksriram682@gmail.com / karthiksriram682@gmail.co
+	email: karthiksriram682@gmail.com
 	pass: karthik@1710 
 
 user 2: 
